@@ -42,4 +42,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function joueur()
+    {
+        return $this->hasOne(JOUEUR::class, 'user_id', 'id');
+    }
+
+    public function deleteWithJoueur()
+    {
+        // Récupérer l'utilisateur
+        $user = $this;
+
+        // Vérifier s'il existe un joueur associé et le supprimer
+        if ($user->joueur) {
+            $user->joueur->delete();
+        }
+
+        // Supprimer l'utilisateur
+        $user->delete();
+    }
 }
