@@ -1,0 +1,37 @@
+/* Style du footer */
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo img {
+    width: 10cm; /* Ajuster la taille du logo */
+    height: auto;
+}
+
+.footer-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer-info a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-info a:hover {
+    color: #ffd700; /* Changez la couleur au survol */
+}

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JOUEUR extends Model
 {
-    protected $fillable = ['ID', 'GRADE', 'LVL', 'COINS','user_id'];
+    protected $fillable = ['ID', 'GRADE', 'LVL', 'COINS','user_id','ROLE'];
     protected $table = 'JOUEUR';
     public $timestamps = false; //by default timestamp true
     use HasFactory;
@@ -15,5 +15,9 @@ class JOUEUR extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function isAdmin() : bool{
+        return $this->ROLE == "Admin";
     }
 }
