@@ -1,9 +1,11 @@
+@if (\Session::has('msg_body'))
+    <h1>{{ Session::get('msg_body')}}</h1>
+@endif
  <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
-
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -70,5 +72,7 @@
      <a href="{{ route('home') }}">Mot de passe oublié</a>
 
      <a href="{{ route('home') }}">Nom d'utilisateur oublié</a>
+
+     <a href="{{route('register')}}">Pas de compte ? S'enregistrer ici !</a>
 
  </div>

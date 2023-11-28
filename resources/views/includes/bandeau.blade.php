@@ -24,14 +24,14 @@
         <nav class="navbar">
             <ul>
                 <li>
-                    <a href="#">Accueil</a>
+                    <a href="{{ route('home') }}">Accueil</a>
                     <ul class="submenu">
                         <li><a href="{{ route('home') }}">Nebula Noodle c'est quoi ?</a></li>
                         <li><a href="{{ route('mises-a-jour')}}">Mis à jour</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Boutique</a>
+                    <a href="{{ route('boutique') }}">Boutique</a>
                     <ul class="submenu">
                         <li><a href="{{ route('home') }}">Acheter un item</a></li>
                         <li><a href="{{ route('home')}}">Acheter un sort</a></li>
@@ -61,7 +61,20 @@
                         </ul>
                     </li>
                 @endif
-                <li><a href="{{ route('home') }}">Se déconnecter</a></li>
+                <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Se déconnecter
+                    </a></li>
+
+
+                <!-- Utilisation d'un lien JavaScript pour appeler une fonction lors du clic -->
+
+
+
+
             </ul>
         </nav>
     </div>
+<!-- Formulaire caché pour effectuer la déconnexion via une requête POST -->
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf <!-- Utilisation du jeton CSRF pour la sécurité -->
+</form>

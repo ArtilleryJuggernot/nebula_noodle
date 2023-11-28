@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Joueur extends Model
 {
-    protected $fillable = ['ID', 'GRADE', 'LVL', 'COINS','user_id','ROLE'];
+    protected $fillable = ["ID",'GRADE', 'LVL', 'COINS','ROLE'];
     protected $table = 'JOUEUR';
+    protected $primaryKey = "ID";
     public $timestamps = false; //by default timestamp true
     use HasFactory;
 

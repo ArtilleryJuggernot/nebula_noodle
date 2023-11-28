@@ -17,10 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/home",function (){
-    return view('home');
-})->middleware('auth')->name('home');;
+Route::get("/home", [\App\Http\Controllers\AccueilController::class,'show']
+    //event(new \App\Events\IncreasePlayerLevel());
+)->middleware('auth')
+    ->name('home');;
 
 Route::get('/clearall',[\App\Http\Controllers\UtilsDev::class,'clearAll']);
 
 Route::get('/mises-a-jour', [\App\Http\Controllers\MAJController::class, 'index'])->name('mises-a-jour');
+
+Route::get("/boutique",[\App\Http\Controllers\BoutiqueController::class,'boutique'])->name("boutique");
+
+
+Route::post('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logout');
