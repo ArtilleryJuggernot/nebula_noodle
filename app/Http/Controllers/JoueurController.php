@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Joueur;
 use Illuminate\Http\Request;
 
-class JOUEUR extends Controller
+class JoueurController extends Controller
 {
     public function register(Request $request)
     {

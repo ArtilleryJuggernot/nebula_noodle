@@ -22,3 +22,5 @@ Route::get("/home",function (){
 })->middleware('auth')->name('home');;
 
 Route::get('/clearall',[\App\Http\Controllers\UtilsDev::class,'clearAll']);
+
+Route::get('/mises-a-jour', [\App\Http\Controllers\MAJController::class, 'index'])->name('mises-a-jour');

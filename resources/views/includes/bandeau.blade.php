@@ -23,7 +23,13 @@
         <!-- Barre de navigation -->
         <nav class="navbar">
             <ul>
-                <li><a href="{{ route('home') }}">Accueil</a></li>
+                <li>
+                    <a href="#">Accueil</a>
+                    <ul class="submenu">
+                        <li><a href="{{ route('home') }}">Nebula Noodle c'est quoi ?</a></li>
+                        <li><a href="{{ route('mises-a-jour')}}">Mis à jour</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="#">Boutique</a>
                     <ul class="submenu">

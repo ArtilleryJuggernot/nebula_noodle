@@ -66,4 +66,9 @@
                 </div>
             </div>
         </div>
-    </div>
+
+     <a href="{{ route('home') }}">Mot de passe oublié</a>
+
+     <a href="{{ route('home') }}">Nom d'utilisateur oublié</a>
+
+ </div>
