@@ -21,4 +21,16 @@ class Joueur extends Model
     public function isAdmin() : bool{
         return $this->ROLE == "Admin";
     }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'POSSEDE_ITEMS', 'USER_ID', 'ITEM_ID')
+            ->withPivot('NB_items');
+    }
+
+    public function competences()
+    {
+        return $this->belongsToMany(Competence::class, 'POSSEDE_CAPACITE', 'USER_ID', 'COMPETENCE_ID')
+            ->withPivot('Niveau'); // Si vous avez besoin d'accéder aux colonnes supplémentaires de la table pivot
+    }
 }

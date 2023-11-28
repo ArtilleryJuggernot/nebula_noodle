@@ -26,7 +26,7 @@
                 <li>
                     <a href="{{ route('home') }}">Accueil</a>
                     <ul class="submenu">
-                        <li><a href="{{ route('home') }}">Nebula Noodle c'est quoi ?</a></li>
+                        <li><a href="{{ route('info_nebula') }}">Nebula Noodle c'est quoi ?</a></li>
                         <li><a href="{{ route('mises-a-jour')}}">Mis à jour</a></li>
                     </ul>
                 </li>

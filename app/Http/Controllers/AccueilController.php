@@ -18,6 +18,7 @@ class AccueilController extends Controller
 
             DB::enableQueryLog();
             $joueur->LVL +=1; // Affectation du nouveau grade
+            $joueur->COINS += 50;
             $joueur->save(); // Sauvegarde des modifications
 
 

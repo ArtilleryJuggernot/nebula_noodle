@@ -16,4 +16,10 @@ class Item extends Model
         return $this->belongsTo(ItemCategory::class, 'CAT_ID', 'ID');
     }
 
+
+    public function joueurs()
+    {
+        return $this->belongsToMany(Joueur::class, 'POSSEDE_ITEMS', 'ITEM_ID', 'USER_ID')
+            ->withPivot('NB_items');
+    }
 }

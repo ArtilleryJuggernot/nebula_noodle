@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin-top: 50px;
+    color: #333;
+}
+
+.offre-speciale {
+    margin: 50px auto;
+    width: 80%;
+}
+
+.offre-speciale h2 {
+    font-size: 36px;
+    margin-top: 30px;
+    color: #555;
+}
+
+.offre-speciale div {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.offre-speciale div h3 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #444;
+}
+
+.offre-speciale div p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.offre-speciale div p.price {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ff5722;
+}
+
+.offre-speciale div:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.offre-speciale .item-container {
+    display: flex;
+    align-items: center;
+}
+
+.offre-speciale .item-container img {
+    width: 150px; /* Ajustez la taille de l'image selon vos besoins */
+    height: 150px; /* Ajustez la taille de l'image selon vos besoins */
+    margin-right: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.offre-speciale .item-container div {
+    flex: 1;
+}
+
+.offre-speciale .competence-container {
+    display: flex;
+    align-items: center;
+}
+
+.offre-speciale .competence-container img {
+    width: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    height: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    margin-right: 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.offre-speciale .competence-container div {
+    flex: 1;
+}
