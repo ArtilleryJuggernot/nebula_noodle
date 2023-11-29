@@ -24,9 +24,13 @@ class BoutiqueController extends Controller
     }
 
     public function acheterItem(Request $request){
+
+
+
         $itemId = $request->get("item"); // Récupère la valeur de 'item' dans la requête
         $item = Item::find($itemId);
         $joueur = Auth::user()->joueur;
+        $joueur->cleanUpItems();
         // Fond nécessaire
         if($joueur->COINS >= $item->INITIAL_PRICE){
             $joueur->COINS -= $item->INITIAL_PRICE;

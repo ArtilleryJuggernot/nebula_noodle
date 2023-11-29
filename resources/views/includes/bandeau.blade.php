@@ -6,7 +6,7 @@
         <!-- Logo du jeu -->
         <div class="logo">
             <!-- Insérer le logo du jeu -->
-            <img src="/img/NN_logo.png" alt="Logo du jeu">
+            <a href="{{route('home')}}"> <img src="/img/NN_logo.png" alt="Logo du jeu"> </a>
         </div>
 
         <!-- Informations de l'utilisateur -->
@@ -40,12 +40,13 @@
                 <li>
                     <a href="#">Marché</a>
                     <ul class="submenu">
-                        <li><a href="{{ route('home') }}">Vendre un item</a></li>
+                        <li><a href="{{ route('ajouter_transaction') }}">Nouvelle vente</a></li>
                         <li><a href="{{ route('home') }}">Retirer une vente</a></li>
+                        <li><a href="{{route("home")}}">Ventes terminé</a> </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('profile', ['id' => Auth::user()->ID]) }}">Mon profil</a>
+                    <a href="{{ route('profile', ['ID' => Auth::user()->joueur->ID]) }}">Mon profil</a>
                     <ul class="submenu">
                         <li><a href="{{route('home')}}">Changer mes informations</a></li>
                         <li><a href="{{ route('home') }}">A propos</a></li>

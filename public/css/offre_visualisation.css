@@ -1,0 +1,33 @@
+/* Styles pour le conteneur principal */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Styles pour le titre */
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+/* Styles pour les détails */
+.details {
+    margin-top: 20px;
+}
+
+.detail-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #444;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: #ff0000;
+    font-weight: bold;
+}

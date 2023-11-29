@@ -10,17 +10,28 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
 {
-    public function profilJoueur(Request $request){
+    public function profilJoueur(Request $request, $ID){
 
         // Si un ID est en paramètre
 
-        if ($request->get("id")){
+
+        /*if ($request->input("id")){
             $user = User::find($request->get("id"));
         }
+
         // Sinon on considère ID du joueur
         else{
             $user = Auth::user();
         }
+        */
+        $user = User::find($ID);
+
+        // joueur introuvable
+        if(!$user){
+            return redirect()->route("home")->with('error', 'Le profil du joueur demandé est inexistant');
+        }
+        // Clean up des items = 0
+        $user->joueur->cleanUpItems();
 
         // Envoyez les données de Item CAT
 

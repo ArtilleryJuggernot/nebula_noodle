@@ -33,4 +33,9 @@ class Joueur extends Model
         return $this->belongsToMany(Competence::class, 'POSSEDE_CAPACITE', 'USER_ID', 'COMPETENCE_ID')
             ->withPivot('Niveau'); // Si vous avez besoin d'accéder aux colonnes supplémentaires de la table pivot
     }
+
+    public function cleanUpItems()
+    {
+        $this->items()->wherePivot('NB_items', 0)->detach();
+    }
 }

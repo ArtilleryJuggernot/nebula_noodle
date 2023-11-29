@@ -13,6 +13,9 @@
 
 @include("includes.bandeau")
 
+@if(session('error'))
+    <h2>{{session('error')}}</h2>
+@endif
 
 @include("includes.playerinfo")
 

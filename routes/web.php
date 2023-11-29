@@ -46,6 +46,18 @@ Route::post('/acheter-competence/',[\App\Http\Controllers\BoutiqueController::cl
     ->middleware("auth")
     ->name('acheter-competence');
 
-Route::get("/profile/",[\App\Http\Controllers\ProfilController::class,"profilJoueur"])
+Route::get("/profile/{ID}",[\App\Http\Controllers\ProfilController::class,"profilJoueur"])
     ->middleware("auth")
     ->name("profile");
+
+Route::get("/ajouter_transaction/",[\App\Http\Controllers\MarcheeController::class,'marchee'])
+    ->middleware("auth")
+    ->name("ajouter_transaction");
+
+Route::post("/traitement_transaction/",[\App\Http\Controllers\MarcheeController::class,"traiterTransaction"])
+    ->middleware("auth")
+    ->name("traitement_transaction");
+
+Route::get('/offre_marche/{ID}', [\App\Http\Controllers\MarcheeController::class, 'afficherOffreMarche'])
+    ->middleware("auth")
+    ->name('offre_marche');

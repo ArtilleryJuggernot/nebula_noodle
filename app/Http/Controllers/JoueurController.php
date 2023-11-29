@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Joueur;
 use Illuminate\Http\Request;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 class JoueurController extends Controller
 {
