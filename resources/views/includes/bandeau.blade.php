@@ -45,9 +45,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Mon profil</a>
+                    <a href="{{ route('profile', ['id' => Auth::user()->ID]) }}">Mon profil</a>
                     <ul class="submenu">
-                        <li><a href="{{ route('home') }}">Changer mes informations</a></li>
+                        <li><a href="{{route('home')}}">Changer mes informations</a></li>
                         <li><a href="{{ route('home') }}">A propos</a></li>
                     </ul>
                 </li>

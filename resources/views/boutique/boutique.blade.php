@@ -53,7 +53,7 @@
         <div class="item-container">
             <img src="/img/items/spell_icon.png" alt="Spell Image">
             <div>
-                <h3>{{ $competence->LIBELLE }} (Sortilège de classe {{ $competence->competenceCategory->CAT_LIBELLE }})</h3>
+                <h3>{{ $competence->LIBELLE }} (Sortilège de classe {{ $competence->categorie->CAT_LIBELLE }})</h3>
                 @if($competence->DESCRIPTION)
                     <p>{{ $competence->DESCRIPTION }}</p>
                 @endif

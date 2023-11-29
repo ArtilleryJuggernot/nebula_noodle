@@ -32,11 +32,19 @@ class BoutiqueController extends Controller
             $joueur->COINS -= $item->INITIAL_PRICE;
             $joueur->save();
             // Contient déjà l'item
-            if($joueur->items->contains($itemId)){
+
+            //DB::enableQueryLog();
+            $bool = $joueur->items()->where("ITEM_ID",$itemId)->first();
+            //dd(DB::getQueryLog(),$bool);
+
+            if($bool){
                 $joueur->items()->updateExistingPivot($itemId, ['NB_items' => DB::raw('NB_items + 1')]);
+
             }
             else {
                 $joueur->items()->attach($itemId, ['NB_items' => 1]);
+
+
             }
         }
         return redirect()->route('boutique')->with('success', 'L\'achat a été effectué avec succès !');

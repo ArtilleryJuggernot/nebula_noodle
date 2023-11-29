@@ -11,12 +11,10 @@ class Competence extends Model
     protected $table = "COMPETENCE";
 
 
-    public function competenceCategory()
+    public function categorie()
     {
         return $this->belongsTo(CompetenceCategory::class, 'CAT_ID', 'CAT_ID');
     }
-
-
 
     public function joueurs()
     {

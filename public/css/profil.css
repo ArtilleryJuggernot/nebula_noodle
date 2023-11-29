@@ -1,0 +1,37 @@
+/* Style pour le bloc descriptif du joueur */
+.player-info {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.player-info img {
+    border-radius: 50%;
+    max-width: 100px;
+    height: auto;
+}
+
+.player-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.player-info p {
+    margin: 5px 0;
+}
+
+/* Stylisation des caractéristiques spécifiques */
+/* Ajoutez vos propres styles pour les caractéristiques du joueur */
+
+/* Styles pour le niveau */
+.player-level {
+    font-weight: bold;
+    color: #ff5722;
+}
+
+/* Styles pour le nombre de pièces */
+.player-coins {
+    font-weight: bold;
+    color: #2196f3;
+}

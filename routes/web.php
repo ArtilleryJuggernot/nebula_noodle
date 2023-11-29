@@ -46,3 +46,6 @@ Route::post('/acheter-competence/',[\App\Http\Controllers\BoutiqueController::cl
     ->middleware("auth")
     ->name('acheter-competence');
 
+Route::get("/profile/",[\App\Http\Controllers\ProfilController::class,"profilJoueur"])
+    ->middleware("auth")
+    ->name("profile");
