@@ -38,7 +38,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Marché</a>
+                    <a href="{{ route("marche") }}">Marché</a>
                     <ul class="submenu">
                         <li><a href="{{ route('ajouter_transaction') }}">Nouvelle vente</a></li>
                         <li><a href="{{ route('home') }}">Retirer une vente</a></li>

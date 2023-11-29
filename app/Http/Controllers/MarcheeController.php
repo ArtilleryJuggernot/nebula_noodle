@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\Joueur;
 use App\Models\TRANSACTION_MARCHE;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MarcheeController extends Controller
 {
-    public function marchee(){
+    public function marchee()
+    {
 
 
         $user = Auth::user();
 
+        $user->joueur->cleanUpItems();
 
         // Récupération des items du joueur
         $itemsDuJoueur = $user->joueur->items;
 
         return view("marchee.ajouter_transaction",
-        [
-        "itemsDuJoueur" => $itemsDuJoueur,
+            [
+                "itemsDuJoueur" => $itemsDuJoueur,
             ]);
     }
 
@@ -63,7 +68,7 @@ class MarcheeController extends Controller
         return redirect()->route("offre_marche", ['ID' => $transaction->ID])->with("success", "Votre offre a été publiée sur le marché");
     }
 
-    public function afficherOffreMarche(Request $request,$ID)
+    public function afficherOffreMarche(Request $request, $ID)
     {
 
         $transaction = TRANSACTION_MARCHE::find($ID);
@@ -80,4 +85,60 @@ class MarcheeController extends Controller
         ]);
     }
 
+    public function listeTransactionsActives()
+    {
+        $transactions = TRANSACTION_MARCHE::where('Statut', 'En cours')
+            ->with('item') // Charger la relation item
+            ->paginate(10);
+
+        $transactions->load('item');
+
+        return view('marchee.liste_transactions',
+            ["transactions" => $transactions,]);
+    }
+
+    public function showConfirmation($ID)
+    {
+        $transaction = TRANSACTION_MARCHE::find($ID);
+
+        return view('marchee.confirm_transaction', [
+            "transaction" => $transaction,
+        ]);
+    }
+
+    public function completeTransaction(Request $request, $ID)
+    {
+        $transaction = TRANSACTION_MARCHE::find($ID);
+
+        if ($request->confirm === 'yes') {
+            $item = Item::find($transaction->ITEM_ID);
+
+            // Vérification des fonds de l'acheteur
+            $buyer = Joueur::find(Auth::user()->joueur->ID);
+            if ($buyer->COINS < $transaction->PIECE_QT) {
+                return redirect()->route('marche')->with('error', 'Fonds insuffisants');
+            }
+
+            // Ajout des pièces au vendeur et retrait de l'acheteur
+            $seller = Joueur::find($transaction->USER1_ID);
+            $seller->update(['COINS' => $seller->COINS + $transaction->PIECE_QT]);
+            $buyer->update(['COINS' => $buyer->COINS - $transaction->PIECE_QT]);
+
+            // Ajout des items à l'acheteur FONCTIONNE 100%
+            $buyer->items()->syncWithoutDetaching([$item->ID => ['NB_items' => DB::raw('NB_items + ' . $transaction->ITEM_QT)]]);
+
+            // Mise à jour de la transaction
+
+            $transaction->update([
+                'Statut' => 'Finish',
+                'USER2_ID' => Auth::user()->joueur->ID,
+                'DT_END' => Carbon::now(),
+            ]);
+
+
+            return redirect()->route('marche')->with('success', 'Transaction terminée avec succès');
+        } else {
+            return redirect()->route('marche')->with('error', 'Transaction annulée avec succès');
+        }
+    }
 }

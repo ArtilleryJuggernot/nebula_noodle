@@ -61,3 +61,15 @@ Route::post("/traitement_transaction/",[\App\Http\Controllers\MarcheeController:
 Route::get('/offre_marche/{ID}', [\App\Http\Controllers\MarcheeController::class, 'afficherOffreMarche'])
     ->middleware("auth")
     ->name('offre_marche');
+
+Route::get("/marche/",[\App\Http\Controllers\MarcheeController::class,'listeTransactionsActives'])
+    ->middleware("auth")
+    ->name("marche");
+
+Route::post('/confirm_transaction/{ID}', [\App\Http\Controllers\MarcheeController::class, 'showConfirmation'])
+    ->middleware("auth")
+    ->name('confirm_transaction');
+
+Route::post('/transaction_complete/{ID}', [\App\Http\Controllers\MarcheeController::class, 'completeTransaction'])
+    ->middleware('auth')
+    ->name('transaction_complete');

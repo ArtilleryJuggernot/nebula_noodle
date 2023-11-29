@@ -12,6 +12,8 @@ class TRANSACTION_MARCHE extends Model
     protected $fillable = ["ID","Statut","DT_CREATION","DT_END","ITEM_QT","ITEM_ID","PIECE_QT","USER1_ID","USER2_ID"];
     public $timestamps = false; //by default timestamp true
 
+    protected $primaryKey = "ID";
+
 
     public function item()
     {
