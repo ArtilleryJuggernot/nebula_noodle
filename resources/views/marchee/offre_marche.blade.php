@@ -25,9 +25,9 @@
             <p class="detail-item">Quantité d'item : {{ $transaction->ITEM_QT }}</p>
             <p class="detail-item">Item: {{ $transaction->item->LIBELLE }}</p>
             <p class="detail-item">Quantité de pièces : {{ $transaction->PIECE_QT }}</p>
-            <p class="detail-item">Vendeur: {{ $transaction->vendeur->user->name }}</p>
+            <p class="detail-item">Acheteur : <a href="{{ route('profile', ['ID' => $transaction->vendeur->ID]) }}">{{ $transaction->vendeur->user->name }}</a></p>
             @if($transaction->USER2_ID)
-                <p class="detail-item">ID de l'acheteur : {{ $transaction->USER2_ID }}</p>
+                <p class="detail-item">Acheteur : <a href="{{ route('profile', ['ID' => $transaction->acheteur->ID]) }}">{{ $transaction->acheteur->user->name }}</a></p>
             @endif
         </div>
     @else

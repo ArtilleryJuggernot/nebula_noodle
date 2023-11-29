@@ -42,7 +42,7 @@
                     <ul class="submenu">
                         <li><a href="{{ route('ajouter_transaction') }}">Nouvelle vente</a></li>
                         <li><a href="{{ route('home') }}">Retirer une vente</a></li>
-                        <li><a href="{{route("home")}}">Ventes terminé</a> </li>
+                        <li><a href="{{route("ventes_terminees")}}">Ventes terminé</a> </li>
                     </ul>
                 </li>
                 <li>

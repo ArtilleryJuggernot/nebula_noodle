@@ -24,4 +24,8 @@ class TRANSACTION_MARCHE extends Model
     {
         return $this->belongsTo(Joueur::class, 'USER1_ID', 'ID');
     }
+
+    public function acheteur(){
+        return $this->belongsTo(Joueur::class,"USER2_ID","ID");
+    }
 }

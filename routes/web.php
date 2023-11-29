@@ -73,3 +73,8 @@ Route::post('/confirm_transaction/{ID}', [\App\Http\Controllers\MarcheeControlle
 Route::post('/transaction_complete/{ID}', [\App\Http\Controllers\MarcheeController::class, 'completeTransaction'])
     ->middleware('auth')
     ->name('transaction_complete');
+
+
+Route::get('/ventes_terminees', [\App\Http\Controllers\MarcheeController::class, 'ventesTerminees'])
+    ->middleware('auth')
+    ->name('ventes_terminees');

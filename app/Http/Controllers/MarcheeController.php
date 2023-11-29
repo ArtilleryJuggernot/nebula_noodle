@@ -141,4 +141,11 @@ class MarcheeController extends Controller
             return redirect()->route('marche')->with('error', 'Transaction annulée avec succès');
         }
     }
+
+    public function ventesTerminees()
+    {
+        $ventesTerminees = TRANSACTION_MARCHE::where('Statut', 'Finish')->paginate(10); // Paginate les ventes terminées par groupe de 10
+
+        return view('marchee.ventes_terminees', ['ventesTerminees' => $ventesTerminees]);
+    }
 }
