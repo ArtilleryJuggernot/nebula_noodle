@@ -33,8 +33,6 @@
                 <li>
                     <a href="{{ route('boutique') }}">Boutique</a>
                     <ul class="submenu">
-                        <li><a href="{{ route('home') }}">Acheter un item</a></li>
-                        <li><a href="{{ route('home')}}">Acheter un sort</a></li>
                     </ul>
                 </li>
                 <li>

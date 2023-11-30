@@ -144,7 +144,8 @@ class MarcheeController extends Controller
 
     public function ventesTerminees()
     {
-        $ventesTerminees = TRANSACTION_MARCHE::where('Statut', 'Finish')->paginate(10); // Paginate les ventes terminées par groupe de 10
+        $ventesTerminees = TRANSACTION_MARCHE::whereIn('Statut', ['Finish', 'Annulé'])
+            ->paginate(10); // Paginate les ventes terminées par groupe de 10
 
         return view('marchee.ventes_terminees', ['ventesTerminees' => $ventesTerminees]);
     }
@@ -153,7 +154,7 @@ class MarcheeController extends Controller
     public function mesVentes()
     {
         $mesVentes = TRANSACTION_MARCHE::where('USER1_ID', Auth::user()->joueur->ID)
-            ->whereIn('Statut', ['En cours', 'Finish','Annulé'])
+            ->whereIn('Statut', ['En cours'])
             ->orderByRaw("Statut = 'En cours' DESC, DT_CREATION DESC")
             ->paginate(10);
 
