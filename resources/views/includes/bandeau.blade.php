@@ -41,7 +41,7 @@
                     <a href="{{ route("marche") }}">Marché</a>
                     <ul class="submenu">
                         <li><a href="{{ route('ajouter_transaction') }}">Nouvelle vente</a></li>
-                        <li><a href="{{ route('home') }}">Retirer une vente</a></li>
+                        <li><a href="{{ route('mes_ventes') }}">Gérer mes ventes</a></li>
                         <li><a href="{{route("ventes_terminees")}}">Ventes terminé</a> </li>
                     </ul>
                 </li>

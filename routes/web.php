@@ -78,3 +78,15 @@ Route::post('/transaction_complete/{ID}', [\App\Http\Controllers\MarcheeControll
 Route::get('/ventes_terminees', [\App\Http\Controllers\MarcheeController::class, 'ventesTerminees'])
     ->middleware('auth')
     ->name('ventes_terminees');
+
+Route::get('/mes_ventes', [\App\Http\Controllers\MarcheeController::class, 'mesVentes'])
+    ->middleware('auth')
+    ->name('mes_ventes');
+
+Route::get('/confirmation_annulation/{ID}', [\App\Http\Controllers\MarcheeController::class, 'confirmationAnnulation'])
+    ->middleware('auth')
+    ->name('confirmation_annulation');
+
+Route::post('/annuler_vente/{ID}', [\App\Http\Controllers\MarcheeController::class, 'annulerVente'])
+    ->middleware('auth')
+    ->name('annuler_vente');

@@ -148,4 +148,63 @@ class MarcheeController extends Controller
 
         return view('marchee.ventes_terminees', ['ventesTerminees' => $ventesTerminees]);
     }
+
+
+    public function mesVentes()
+    {
+        $mesVentes = TRANSACTION_MARCHE::where('USER1_ID', Auth::user()->joueur->ID)
+            ->whereIn('Statut', ['En cours', 'Finish','Annulé'])
+            ->orderByRaw("Statut = 'En cours' DESC, DT_CREATION DESC")
+            ->paginate(10);
+
+        return view('marchee.mes_ventes', ['mesVentes' => $mesVentes]);
+    }
+
+    public function confirmationAnnulation($ID)
+    {
+        $vente = TRANSACTION_MARCHE::findOrFail($ID);
+
+        if(!$vente)
+            return redirect()->route('mes_ventes')->with("error","Impossible de trouver la vente à annuler !");
+
+
+        if($vente->USER1_ID == Auth::user()->joueur->ID)
+            return view('marchee.confirmation_annulation', ['vente' => $vente]);
+        return redirect()->route('mes_ventes')->with("error","Vous ne pouvez pas annuler une vente dont nous n'êtes pas le propriétaire !");
+    }
+
+
+    public function annulerVente($ID)
+    {
+        $vente = TRANSACTION_MARCHE::findOrFail($ID);
+
+        // Vente innexistante
+        if(!$vente)
+            return redirect()->route('mes_ventes')->with("error","Impossible de trouver la vente à annuler !");
+
+
+        if($vente->USER1_ID != Auth::user()->joueur->ID)
+            return redirect()->route('mes_ventes')->with("error","Vous ne pouvez pas annuler une vente dont nous n'êtes pas le propriétaire !");
+        $vente->update(['Statut' => 'Annulé']);
+
+
+        // Remboursement des articles au vendeur (USER1_ID)
+        $vendeur = $vente->vendeur;
+        $article = $vente->item;
+        $quantiteArticle = $vente->ITEM_QT;
+
+        // Vérification si le vendeur possède déjà cet article
+        $possessionArticle = $vendeur->items()->where('ITEM_ID', $article->ID)->first();
+
+        if ($possessionArticle) {
+            // Mise à jour de la quantité si l'article est déjà possédé par le vendeur
+            $possessionArticle->pivot->NB_items += $quantiteArticle;
+            $possessionArticle->pivot->save();
+        } else {
+            // Ajout de la quantité d'article au vendeur s'il ne le possède pas déjà
+            $vendeur->items()->attach($article->ID, ['NB_items' => $quantiteArticle]);
+        }
+
+        return redirect()->route('mes_ventes')->with('success', 'La vente a été annulée.');
+    }
 }

@@ -12,9 +12,9 @@
 <h1>Liste des transactions actives</h1>
 
 
-@if(session('success'))
-    <h2>{{session('success')}}</h2>
-@endif
+    @if(session('success'))
+        <h2>{{session('success')}}</h2>
+    @endif
 
 
 @if(session('error'))
@@ -35,7 +35,7 @@
                     <p class="detail-item">Quantité d'item : {{ $transaction->ITEM_QT }}</p>
                     <p class="detail-item">Item: {{ $transaction->item->LIBELLE }}</p>
                     <p class="detail-item">Quantité de pièces : {{ $transaction->PIECE_QT }}</p>
-                    <p class="detail-item">Acheteur : <a href="{{ route('profile', ['ID' => $transaction->vendeur->ID]) }}">{{ $transaction->vendeur->user->name }}</a></p>
+                    <p class="detail-item">Vendeur : <a href="{{ route('profile', ['ID' => $transaction->vendeur->ID]) }}">{{ $transaction->vendeur->user->name }}</a></p>
                     <p class="detail-item">Acheteur : <a href="{{ route('profile', ['ID' => $transaction->acheteur->ID]) }}">{{ $transaction->acheteur->user->name }}</a></p>
                 </div>
             </li>
