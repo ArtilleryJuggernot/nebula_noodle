@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Joueur extends Model
 {
@@ -37,5 +39,19 @@ class Joueur extends Model
     public function cleanUpItems()
     {
         $this->items()->wherePivot('NB_items', 0)->detach();
+    }
+
+    public function classePredilection() : string
+    {
+        $joueur = Auth::user()->joueur;
+        $competences = $joueur->competences()->with('categorie')->get();
+
+        $classePredilection = $competences->groupBy('categorie.CAT_LIBELLE')
+            ->map->count()
+            ->sortDesc()
+            ->keys()
+            ->first();
+
+        return $classePredilection;
     }
 }

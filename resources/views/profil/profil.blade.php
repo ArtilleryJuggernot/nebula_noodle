@@ -14,9 +14,12 @@
 
         <!-- Informations du joueur -->
         <div class="player-details">
-            <p><strong>Nom:</strong> {{ $user->name }}</p>
+            <p><strong>Nom d'utilisateur:</strong> {{ $user->name }}</p>
             <p><strong>Niveau:</strong> <span class="player-level">{{ $user->joueur->LVL }}</span></p>
             <p><strong>Nombre de pièces:</strong> <span class="player-coins">{{ $user->joueur->COINS }}</span></p>
+            <p><strong>Grade Actuel :</strong> <span class="">{{ $user->joueur->GRADE }}</span></p>
+            <p><strong>Classe de prédilection :</strong> <span class="">{{ $user->joueur->classePredilection() }}</span></p>
+
         </div>
     </div>
 </div>
