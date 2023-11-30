@@ -59,7 +59,7 @@
                 <li>
                     <a href="{{ route('profile', ['ID' => Auth::user()->joueur->ID]) }}">Mon profil</a>
                     <ul class="submenu">
-                        <li><a href="{{route('home')}}">Changer mes informations</a></li>
+                        <li><a href="{{route('editProfile')}}">Changer mes informations</a></li>
                         <li><a href="{{ route('home') }}">A propos</a></li>
                     </ul>
                 </li>

@@ -12,4 +12,6 @@ class ClientController extends Controller
         return redirect('/login')->with(['msg_body' => 'Deconnexion réussie !']);
     }
 
+
+
 }

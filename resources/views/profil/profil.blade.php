@@ -4,6 +4,14 @@
 @include("includes.bandeau")
 
 
+@if(session('success'))
+    <h2>{{session('success')}}</h2>
+@endif
+
+@if(session('error'))
+    <h2>{{session('error')}}</h2>
+@endif
+
 <h1>Profil de : {{$user->name}}</h1>
 
 <div class="profil-block">

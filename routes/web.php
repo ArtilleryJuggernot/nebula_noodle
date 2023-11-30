@@ -31,6 +31,8 @@ Route::get("/boutique",[\App\Http\Controllers\BoutiqueController::class,'boutiqu
 
 
 Route::post('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logout');
+Route::get('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logoutGET');
+
 
 Route::get("/info_nebula",function (){
     return view("accueil.info_nebula");
@@ -89,3 +91,13 @@ Route::get('/confirmation_annulation/{ID}', [\App\Http\Controllers\MarcheeContro
 Route::post('/annuler_vente/{ID}', [\App\Http\Controllers\MarcheeController::class, 'annulerVente'])
     ->middleware('auth')
     ->name('annuler_vente');
+
+Route::get('/edit-profile', [\App\Http\Controllers\ProfilController::class, 'editProfile'])
+    ->middleware("auth")
+    ->name('editProfile');
+
+Route::post('/update-profile', [\App\Http\Controllers\ProfilController::class, 'updateProfile'])->name('updateProfile');
+
+Route::post("/updatePassword",[\App\Http\Controllers\ProfilController::class,"updatePassword"])
+    ->middleware("auth")
+    ->name("updatePassword");

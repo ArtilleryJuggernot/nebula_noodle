@@ -1,0 +1,17 @@
+form {
+    margin-bottom: 20px;
+}
+
+label, input, textarea {
+    display: block;
+    margin-bottom: 10px;
+}
+
+button {
+    display: block;
+    padding: 8px 12px;
+    background-color: #3490dc;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
