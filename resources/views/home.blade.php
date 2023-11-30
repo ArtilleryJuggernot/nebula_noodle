@@ -1,4 +1,7 @@
-<h1>Bienvenue {{Auth::user()->name}} sur Nebula Noodle !!!!</h1>
+
+@if(Auth::user())
+    <h1>Bienvenue {{Auth::user()->name}} sur Nebula Noodle !!!!</h1>
+@endif
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,9 @@
     <h2>{{session('error')}}</h2>
 @endif
 
-@include("includes.playerinfo")
+@if(\Illuminate\Support\Facades\Auth::user())
+    @include("includes.playerinfo")
+@endif
 
 
 @include("includes.footer")

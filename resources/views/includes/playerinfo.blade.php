@@ -3,6 +3,10 @@
 </head>
 
 <div class="player-details">
-    <p>Nom d'utilisateur : <span id="username">{{Auth::user()->name }}</span> - Classe : <span id="classe">{{Auth::user()->joueur->GRADE}}</span></p>
-    <p>LVL : <span id="level">{{Auth::user()->joueur->LVL}}</span> - Coins : <span id="coins">{{Auth::user()->joueur->COINS}}</span></p>
+    <p><strong>Nom d'utilisateur:</strong> {{ \Illuminate\Support\Facades\Auth::user()->name }}</p>
+    <p><strong>Niveau:</strong> <span class="player-level">{{ \Illuminate\Support\Facades\Auth::user()->joueur->LVL }}</span></p>
+    <p><strong>Nombre de pièces:</strong> <span class="player-coins">{{ \Illuminate\Support\Facades\Auth::user()->joueur->COINS }}</span></p>
+    <p><strong>Grade Actuel :</strong> <span class="">{{ \Illuminate\Support\Facades\Auth::user()->joueur->GRADE }}</span></p>
+    <p><strong>Classe de prédilection :</strong> <span class="">{{ \Illuminate\Support\Facades\Auth::user()->joueur->classePredilection() }}</span></p>
+
 </div>

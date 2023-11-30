@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get("/home", [\App\Http\Controllers\AccueilController::class,'show']
+Route::get("/", [\App\Http\Controllers\AccueilController::class,'show'])
     //event(new \App\Events\IncreasePlayerLevel());
-)->middleware('auth') // TODO : Remove ça et adapter le code pour que le joueur puisse accéder au menu de base + ne pas afficher les autres section dans le bandeau si le joueur n'est pas log
+    ->name('home');
+
+Route::get("/home", [\App\Http\Controllers\AccueilController::class,'show'])
+    //event(new \App\Events\IncreasePlayerLevel());
     ->name('home');
 
 Route::get('/clearall',[\App\Http\Controllers\UtilsDev::class,'clearAll']);

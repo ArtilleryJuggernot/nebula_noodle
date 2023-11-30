@@ -11,6 +11,8 @@
 
         <!-- Informations de l'utilisateur -->
         <div class="user-info">
+            @if(Auth::user())
+
             @if(Auth::user()->joueur->isAdmin())
                 <!-- Si l'utilisateur est administrateur -->
                 (Admininistrateur) Bienvenue {{ Auth::user()->name }} sur Nebula Noodle !
@@ -18,6 +20,11 @@
                 <!-- Si l'utilisateur est un joueur -->
                 Bienvenue {{ Auth::user()->name }} sur Nebula Noodle !
             @endif
+
+            @else
+                Bienvenue visiteur sur Nebula Noodle !
+            @endif
+
         </div>
 
         <!-- Barre de navigation -->
@@ -30,11 +37,14 @@
                         <li><a href="{{ route('mises-a-jour')}}">Mis à jour</a></li>
                     </ul>
                 </li>
+                @if(Auth::user())
                 <li>
                     <a href="{{ route('boutique') }}">Boutique</a>
                     <ul class="submenu">
                     </ul>
                 </li>
+                @endif
+                @if(Auth::user())
                 <li>
                     <a href="{{ route("marche") }}">Marché</a>
                     <ul class="submenu">
@@ -43,6 +53,9 @@
                         <li><a href="{{route("ventes_terminees")}}">Ventes terminé</a> </li>
                     </ul>
                 </li>
+                @endif
+                @if(Auth::user())
+
                 <li>
                     <a href="{{ route('profile', ['ID' => Auth::user()->joueur->ID]) }}">Mon profil</a>
                     <ul class="submenu">
@@ -50,6 +63,8 @@
                         <li><a href="{{ route('home') }}">A propos</a></li>
                     </ul>
                 </li>
+                @endif
+            @if(Auth::user())
                 @if(Auth::user()->joueur->isAdmin())
                     <!-- Si l'utilisateur est administrateur -->
                     <li>
@@ -60,9 +75,20 @@
                         </ul>
                     </li>
                 @endif
+                @endif
+                @if(Auth::user())
                 <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Se déconnecter
                     </a></li>
+                @else
+                    <li><a href="{{route("login")}}">
+                            Se connecter
+                        </a></li>
+                    <li><a href="{{route("register")}}">
+                            S'enregister !
+                        </a></li>
+
+                @endif
 
 
                 <!-- Utilisation d'un lien JavaScript pour appeler une fonction lors du clic -->
