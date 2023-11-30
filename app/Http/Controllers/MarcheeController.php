@@ -134,7 +134,15 @@ class MarcheeController extends Controller
             $buyer->update(['COINS' => $buyer->COINS - $transaction->PIECE_QT]);
 
             // Ajout des items à l'acheteur FONCTIONNE 100%
-            $buyer->items()->syncWithoutDetaching([$item->ID => ['NB_items' => DB::raw('NB_items + ' . $transaction->ITEM_QT)]]);
+
+            $existingItem = $buyer->items()->wherePivot('ITEM_ID', $item->ID)->first();
+
+            if ($existingItem) {
+                $updatedQuantity = $existingItem->pivot->NB_items + $transaction->ITEM_QT;
+                $buyer->items()->updateExistingPivot($item->ID, ['NB_items' => $updatedQuantity]);
+            } else {
+                $buyer->items()->attach($item->ID, ['NB_items' => $transaction->ITEM_QT]);
+            }
 
             // Mise à jour de la transaction
 
@@ -145,7 +153,7 @@ class MarcheeController extends Controller
             ]);
 
             LogsController::logAction("TRANSACTION VALIDE",
-                "Transaction validé par le vendeur " . $seller->name.
+                "Transaction validé par le vendeur " . $seller->user->name.
                 ". Item mis en vente  : " . $item->LIBELLE .
                 ", Quantité : " . $transaction->ITEM_QT .
                 ". Au prix de :" . $transaction->PIECE_QT .

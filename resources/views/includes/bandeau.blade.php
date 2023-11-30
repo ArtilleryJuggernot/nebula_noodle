@@ -70,8 +70,8 @@
                     <li>
                         <a href="#">Administration</a>
                         <ul class="submenu">
-                            <li><a href="{{ route('home') }}">Gestion des logs</a></li>
-                            <li><a href="{{ route('home') }}">Gestion des utilisateurs</a></li>
+                            <li><a href="{{ route('filter_logs') }}">Gestion des logs</a></li>
+                            <li><a href="{{ route('playersList') }}">Gestion des utilisateurs</a></li>
                         </ul>
                     </li>
                 @endif
