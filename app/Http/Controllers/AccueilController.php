@@ -20,8 +20,6 @@ class AccueilController extends Controller
             $joueur->LVL +=1; // Affectation du nouveau grade
             $joueur->COINS += 50;
             $joueur->save(); // Sauvegarde des modifications
-
-
         }
 
         return view('home');

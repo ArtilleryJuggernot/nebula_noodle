@@ -52,6 +52,9 @@ class Joueur extends Model
             ->keys()
             ->first();
 
+        if ($classePredilection == null){
+            $classePredilection = "Pas encore assez de sort";
+        }
         return $classePredilection;
     }
 }

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class MarcheeController extends Controller
 {
+
+    // Ajouter transactions
     public function marchee()
     {
 
@@ -64,7 +66,14 @@ class MarcheeController extends Controller
         $transaction->USER1_ID = $user->joueur->ID;
         $transaction->save();
 
+        $item = Item::find($itemId);
+
         // Redirection vers la page d'offre avec l'ID de la transaction
+        LogsController::logAction("NEW TRANSACTION",
+            "Nouvelle vente du joueur " . Auth::user()->name .
+            ". Item mis en vente  : " . $item->LIBELLE .
+            ", Quantité : " . $transaction->ITEM_QT .
+        ". Au prix de :" . $transaction->PIECE_QT);
         return redirect()->route("offre_marche", ['ID' => $transaction->ID])->with("success", "Votre offre a été publiée sur le marché");
     }
 
@@ -135,6 +144,12 @@ class MarcheeController extends Controller
                 'DT_END' => Carbon::now(),
             ]);
 
+            LogsController::logAction("TRANSACTION VALIDE",
+                "Transaction validé par le vendeur " . $seller->name.
+                ". Item mis en vente  : " . $item->LIBELLE .
+                ", Quantité : " . $transaction->ITEM_QT .
+                ". Au prix de :" . $transaction->PIECE_QT .
+            ". Acheté par :" . $buyer->user->name);
 
             return redirect()->route('marche')->with('success', 'Transaction terminée avec succès');
         } else {
@@ -205,7 +220,11 @@ class MarcheeController extends Controller
             // Ajout de la quantité d'article au vendeur s'il ne le possède pas déjà
             $vendeur->items()->attach($article->ID, ['NB_items' => $quantiteArticle]);
         }
-
+        LogsController::logAction("TRANSACTION CANCEL",
+            "Vente annulé du joueur " . Auth::user()->name .
+            ". Item mis en vente  : " . $possessionArticle->LIBELLE .
+            ", Quantité : " . $quantiteArticle .
+            ". Au prix de :" . $vente->PIECE_QT);
         return redirect()->route('mes_ventes')->with('success', 'La vente a été annulée.');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Joueur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\RegisterResponse;
 
 class JoueurController extends Controller
@@ -27,6 +28,7 @@ class JoueurController extends Controller
 
         // Associer le joueur à l'utilisateur
         $user->joueur()->save($joueur);
+        LogsController::logAction("REGISTER","Enregistrement d'un nouveau joueur : " . $user->name . " avec l'identifiant " . $user->ID);
 
         return app(RegisterResponse::class);
     }

@@ -12,6 +12,7 @@ class BoutiqueController extends Controller
 {
 
 
+
     public function boutique()
     {
         // Sélection aléatoire de 4 items de chaque catégorie et 4 compétences
@@ -47,18 +48,18 @@ class BoutiqueController extends Controller
             }
             else {
                 $joueur->items()->attach($itemId, ['NB_items' => 1]);
-
-
             }
+            LogsController::logAction("ACHAT ITEM","Achat de l'item " . $item->LIBELLE . " par le joueur ". Auth::user()->name . " dans la boutique.");
+            return redirect()->route('boutique')->with('success', 'L\'achat a été effectué avec succès !');
+
         }
-        return redirect()->route('boutique')->with('success', 'L\'achat a été effectué avec succès !');
 
     }
 
     public function acheterCompetence(Request $request) {
         // Obtenir l'ID de la compétence à acheter depuis la requête
         $competenceId = $request->get("competence");
-
+        $competence = Competence::find($competenceId);
         // Récupérer la compétence correspondante à l'ID
         //$competence = Competence::findOrFail($competenceId);
 
@@ -81,12 +82,16 @@ class BoutiqueController extends Controller
 
                     //$queries = DB::getQueryLog();
                     //dd($queries);
+                    LogsController::logAction("ACHAT SORTILEGE","Achat du sortilège " .  $competence->LIBELLE . " par le joueur ". Auth::user()->name . " dans la boutique.");
+
                     return redirect()->route('boutique')->with('success', 'Compétence achetée avec succès !');
                 } else {
                     // Si le joueur possède déjà cette compétence, augmenter son niveau
 
                     $joueur->competences()->updateExistingPivot($competenceId, ['Niveau' => DB::raw('Niveau + 1')]);
 
+
+                    LogsController::logAction("ACHAT SORTILEGE","Niveau d'amélioration du sortilège " .  $competence->LIBELLE . " augmenté pour le joueur ". Auth::user()->name . " dans la boutique.");
                     return redirect()->route('boutique')->with('success', 'Niveau de la compétence augmenté avec succès !');
                 }
             }

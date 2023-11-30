@@ -75,6 +75,9 @@ class ProfilController extends Controller
         $joueur->save();
         Auth::user()->save();
 
+        LogsController::logAction("PROFIL UPDATE","Mis à jour du profil de l'utilisateur " . Auth::user()->name . ". Nouveau nom d'utilisateur  : " . Auth::user()->name . " Nouveau grade : " . $joueur->GRADE );
+
+
         return redirect()->route('profile',["ID" => Auth::user()->joueur->ID])->with('success', 'Profil mis à jour avec succès');
     }
 
@@ -88,6 +91,9 @@ class ProfilController extends Controller
 
         $user->password = Hash::make($request->new_password);
         Auth::user()->save();
+
+        LogsController::logAction("PASSWORD UPDATE","Mot de passe mis à jours avec succès pour l'utilisateur : " . Auth::user()->name);
+
 
         return redirect()->route('profile',["ID" => Auth::user()->joueur->ID])->with('success', 'Mot de passe mis à jour avec succès');
     }

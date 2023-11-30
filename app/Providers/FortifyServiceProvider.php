@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Controllers\LogsController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -48,8 +49,10 @@ class FortifyServiceProvider extends ServiceProvider
 
             if ($user &&
                 Hash::check($request->password, $user->password)) {
+                LogsController::logAction("LOGIN SUCCESS", "L'utilisateur " . $user->name . " s'est connecté.");
                 return $user;
             }
+            LogsController::logAction("LOGIN FAILED", "Tentative de connexion échoué avec l'email : " . $request->email);
         });
 
         Fortify::registerView(function (){
