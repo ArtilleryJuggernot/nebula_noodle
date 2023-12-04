@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Joueur extends Model
 {
-    protected $fillable = ["ID",'GRADE', 'LVL', 'COINS','ROLE'];
+    protected $fillable = ["ID",'GRADE', 'LVL', 'COINS','ROLE',"user_id"];
     protected $table = 'JOUEUR';
     protected $primaryKey = "ID";
     public $timestamps = false; //by default timestamp true

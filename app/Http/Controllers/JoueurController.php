@@ -27,7 +27,8 @@ class JoueurController extends Controller
         ]);
 
         // Associer le joueur à l'utilisateur
-        $user->joueur()->save($joueur);
+        $user->joueur->save($joueur);
+
         LogsController::logAction("REGISTER","Enregistrement d'un nouveau joueur : " . $user->name . " avec l'identifiant " . $user->ID);
 
         return app(RegisterResponse::class);

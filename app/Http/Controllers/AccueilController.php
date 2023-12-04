@@ -14,12 +14,13 @@ class AccueilController extends Controller
 
         if ($user) {
             // Récupérer le joueur associé à l'utilisateur
+            //DB::enableQueryLog();
             $joueur = $user->joueur;
-
-            DB::enableQueryLog();
+            //$query = DB::getQueryLog();
             $joueur->LVL +=1; // Affectation du nouveau grade
             $joueur->COINS += 50;
             $joueur->save(); // Sauvegarde des modifications
+
         }
 
         return view('home');

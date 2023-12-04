@@ -27,11 +27,11 @@
 
     <!-- Champ pour la quantité de l'item-->
     <label for="quantity">Quantité :</label>
-    <input type="number" id="quantity" name="quantity" min="1">
+    <input type="number" id="quantity" name="quantity" min="1" max="2000000000">
 
     <!-- Champ pour la quantité -->
     <label for="price">Prix :</label>
-    <input type="number" id="price" name="price" min="1">
+    <input type="number" id="price" name="price" min="1" max="2000000000">
 
 
 

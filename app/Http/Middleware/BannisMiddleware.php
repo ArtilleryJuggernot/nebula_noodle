@@ -16,10 +16,13 @@ class BannisMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->is_ban) {
-            auth()->logout(); // Déconnecte l'utilisateur banni
+        if(Auth::user()){
+            if (Auth::user()->is_ban) {
+                auth()->logout(); // Déconnecte l'utilisateur banni
                 return redirect()->route('bannedPage');
+            }
         }
+
 
         return $next($request);
     }

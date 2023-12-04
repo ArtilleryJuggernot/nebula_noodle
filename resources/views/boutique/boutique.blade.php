@@ -14,6 +14,8 @@
 <div>
     <h1 class="text-center">Boutique</h1>
 
+    <h2>Nombre de pièce : {{\Illuminate\Support\Facades\Auth::user()->joueur->COINS}}</h2>
+
     <div class="offre-speciale">
         <h2>Offre spécial ! </h2>
         @foreach($itemsOffreSpeciale as $item)

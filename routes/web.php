@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+ * Home
+ * */
+
 Route::get("/", [\App\Http\Controllers\AccueilController::class,'show'])
     //event(new \App\Events\IncreasePlayerLevel());
     ->middleware("not_ban")
@@ -23,30 +27,38 @@ Route::get("/home", [\App\Http\Controllers\AccueilController::class,'show'])
         ->middleware("not_ban")
     ->name('home');
 
-//Route::get('/clearall',[\App\Http\Controllers\UtilsDev::class,'clearAll']);
+
+Route::get("/info_nebula",function (){
+    return view("accueil.info_nebula");
+})->name("info_nebula");
 
 Route::get('/mises-a-jour', [\App\Http\Controllers\MAJController::class, 'index'])->name('mises-a-jour');
+
+
+/*
+ * Boutique
+ * */
+
 
 Route::get("/boutique",[\App\Http\Controllers\BoutiqueController::class,'boutique'])
     ->middleware("auth","not_ban")
     ->name("boutique");
 
 
-Route::post('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logout');
-Route::get('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logoutGET');
-
-
-Route::get("/info_nebula",function (){
-    return view("accueil.info_nebula");
-    })->name("info_nebula");
 
 Route::post('/acheter-item/',[\App\Http\Controllers\BoutiqueController::class,'acheterItem'])
     ->middleware("auth","not_ban")
     ->name('acheter-item');
 
+
 Route::post('/acheter-competence/',[\App\Http\Controllers\BoutiqueController::class,'acheterCompetence'])
     ->middleware("auth","not_ban")
     ->name('acheter-competence');
+
+
+// Route de mapping
+
+
 
 Route::get("/profile/{ID}",[\App\Http\Controllers\ProfilController::class,"profilJoueur"])
     ->middleware("auth","not_ban")
@@ -103,8 +115,14 @@ Route::post("/updatePassword",[\App\Http\Controllers\ProfilController::class,"up
     ->middleware("auth","not_ban")
     ->name("updatePassword");
 
+
+
+/*
+ * Admin
+ * */
+
 Route::get('/filter_logs', [\App\Http\Controllers\AdministrationController::class, 'filterLogs'])
-    ->middleware("auth","not_ban")
+    ->middleware("auth","not_ban","admin")
     ->name('filter_logs');
 
 // Route pour afficher la liste des joueurs
@@ -120,3 +138,16 @@ Route::post('/players/ban/{id}', [\App\Http\Controllers\AdministrationController
 Route::get("/banned/",function (){
     return view("admin.bannedpage");
 })->name("bannedPage");
+
+
+
+Route::post('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logout');
+Route::get('logout', [\App\Http\Controllers\ClientController::class, 'logout'])->name('logoutGET');
+
+
+// Route de fin rediret Accueil
+
+Route::any('{any}', function () {
+    return Response::view('errors.404', [], 404);
+})->where('any', '.*');
+
